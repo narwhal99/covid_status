@@ -10,6 +10,7 @@ const ReportSchema: Schema = new Schema({
   sourceUrl: { type: String },
   lastUpdatedAtSource: { type: Date },
   lastUpdatedAtApify: { type: Date },
+  readMe: { type: String },
 });
 
 export default mongoose.model("Report", ReportSchema);
