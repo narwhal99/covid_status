@@ -11,10 +11,8 @@ let fetchData = async () => {
     const data = await axios.get(
       "https://api.apify.com/v2/datasets/Gm6qjTgGqxkEZTkuJ/items"
     );
-    console.log(data.data.length);
-    console.log(await Report.count());
 
-    if (data.data.length > await Report.count()) {
+    if (data.data.length > (await Report.count())) {
       await Report.remove();
       Report.insertMany(data.data, {}, function (err, result) {
         if (err) {
