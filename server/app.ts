@@ -38,6 +38,17 @@ mongoose.connect("mongodb://127.0.0.1:27017/covid", (err) => {
 
 const app = express();
 
+//Middleware
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT,POST,PATCH,DELETE,GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
 //router
 app.use(report);
 
