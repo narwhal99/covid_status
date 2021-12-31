@@ -1,17 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from "react-dom";
+import Charts from "./charts";
+import React, { useState } from "react";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const options = [
+  "infected",
+  "activeInfected",
+  "deceased",
+  "recovered",
+  "quarantined",
+  "tested",
+];
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class App extends React.Component<
+  {},
+  {
+    value: String;
+  }
+> {
+  constructor(props: String) {
+    super(props);
+    this.state = { value: "infected" };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event: any = "Infected") {
+    this.setState({ value: event.target.value });
+  }
+  render() {
+    return (
+      <div>
+        <select name="datatype" id="datatype" onChange={this.handleChange}>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <Charts filterData={this.state.value} />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"));
