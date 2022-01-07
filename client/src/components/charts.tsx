@@ -9,7 +9,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import moment from "moment";
-import { Reports } from "./hooks/report";
+import { Reports } from "./report";
 
 function Chart({ filterData }: any) {
   const data = Reports();
@@ -23,7 +23,7 @@ function Chart({ filterData }: any) {
             axisLine={false}
             tickLine={false}
             dataKey="lastUpdatedAtApify"
-            tickFormatter={(date) => moment(date).format("YYYY.MM.DD")}
+            // tickFormatter={(date) => moment(date).format("YYYY.MM.DD")}
           />
           <YAxis
             tickLine={false}
